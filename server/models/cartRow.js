@@ -2,15 +2,15 @@ const sequelize = require("sequelize");
 
 module.exports = (sequelize, DataTypes) => {
   return sequelize.define(
-    "cart",
+    "cartRow",
     {
       id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true,
       },
-      payed: {
-        type: DataTypes.BOOLEAN,
+      amount: {
+        type: DataTypes.FLOAT(1),
       },
     },
     { underscored: true }

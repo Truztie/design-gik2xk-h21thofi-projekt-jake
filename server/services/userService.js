@@ -10,4 +10,17 @@ async function getAll() {
   }
 }
 
-module.exports = { getAll };
+async function getByUser(userId) {
+  try {
+    const user = await db.user.findOne({ 
+        where: { id: userId }, 
+        include: [db.cart] 
+    });
+    /* Om allt blev bra, returnera allPosts */
+    return user
+  } catch (error) {
+    return error.status, error.message;
+  }
+}
+
+module.exports = { getAll, getByUser };

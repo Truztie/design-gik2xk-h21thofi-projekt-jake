@@ -46,14 +46,15 @@ db.user.hasMany(db.cart, {
 
 
 db.rating.belongsTo(db.product, {
+  foreignKey: { allowNull: false },
   onDelete: 'CASCADE'
 });
 db.product.hasMany(db.rating, {
   allowNull: false
 });
 
-//db.product.belongsToMany(db.cart, { through: db.cart_row });
-//db.cart.belongsToMany(db.product, { through: db.cart_row });
+db.product.belongsToMany(db.cart, { through: db.cartRow, foreignKey: { allowNull: false } });
+db.cart.belongsToMany(db.product, { through: db.cartRow, foreignKey: { allowNull: false } });
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
