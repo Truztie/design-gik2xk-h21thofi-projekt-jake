@@ -9,8 +9,8 @@ module.exports = (sequelize, DataTypes) => {
         autoIncrement: true,
         primaryKey: true,
       },
-      payed: {
-        type: DataTypes.BOOLEAN,
+      amount: {
+        type: DataTypes.FLOAT(1),
       },
     },
     { underscored: true }

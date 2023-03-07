@@ -97,9 +97,9 @@ router.delete("/", (req, res) => {
 });
 
 router.get("/:id", (req, res) => {
-  const productId = req.params.id;
+  const userId = req.params.id;
   productService
-    .getByProduct(productId)
+    .getByProduct(userId)
     .then((result) => {
       res.send(result);
     })

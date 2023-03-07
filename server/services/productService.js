@@ -1,6 +1,4 @@
-const { async } = require("validate.js");
 const db = require("../models");
-
 async function getAllProducts() {
   try {
     const allProducts = await db.product.findAll({ include: [db.rating] });
@@ -11,17 +9,16 @@ async function getAllProducts() {
 }
 
 async function getByProduct(productId) {
-    try {
-      const product = await db.product.findOne({ 
-          where: { id: productId }, 
-          include: [db.rating] 
-      });
-      /* Om allt blev bra, returnera allPosts */
-      return product
-    } catch (error) {
-      return error.status, error.message;
-    }
+  try {
+    const product = await db.product.findOne({
+      where: { id: productId },
+      include: [db.rating],
+    });
+
+    return product;
+  } catch (error) {
+    return error;
   }
+}
 
-
-module.exports = { getAllProducts, getByProduct};
+module.exports = { getAllProducts, getByProduct };

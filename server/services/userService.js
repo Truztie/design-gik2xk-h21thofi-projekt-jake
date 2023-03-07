@@ -12,14 +12,14 @@ async function getAll() {
 
 async function getByUser(userId) {
   try {
-    const user = await db.user.findOne({ 
-        where: { id: userId }, 
-        include: [db.cart] 
+    const user = await db.user.findOne({
+      where: { id: userId },
+      include: [db.cart],
     });
-    /* Om allt blev bra, returnera allPosts */
-    return user
+
+    return user;
   } catch (error) {
-    return error.status, error.message;
+    return error;
   }
 }
 
