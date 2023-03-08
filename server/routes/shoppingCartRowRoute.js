@@ -1,4 +1,4 @@
-/*const router = require("express").Router();
+const router = require("express").Router();
 const db = require("../models");
 
 router.get("/", (req, res) => {
@@ -6,4 +6,4 @@ router.get("/", (req, res) => {
     res.send(result);
   });
 });
-module.exports = router;*/
+module.exports = router;

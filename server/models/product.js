@@ -9,10 +9,6 @@ module.exports = (sequelize, DataTypes) => {
         autoIncrement: true,
         primaryKey: true,
       },
-      artikelNr: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-      },
       title: {
         type: DataTypes.STRING(100),
         allowNull: false,

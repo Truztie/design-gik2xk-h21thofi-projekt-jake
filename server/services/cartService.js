@@ -1,11 +1,15 @@
 const { async } = require("validate.js");
 const db = require("../models");
-
 async function getCartById(cartId) {
   try {
     const cart = await db.cart.findOne({
       where: { id: cartId },
-      include: [db.product]
+      include: [
+        {
+          model: db.product,
+          attributes: ["id", "title", "price", "description", "imageUrl"],
+        },
+      ],
     });
 
     return cart;
@@ -13,4 +17,5 @@ async function getCartById(cartId) {
     return error;
   }
 }
+
 module.exports = { getCartById };
