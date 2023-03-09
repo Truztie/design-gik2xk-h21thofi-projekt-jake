@@ -1,3 +1,5 @@
+import { Grid, Paper } from '@mui/material';
+import { flexbox, flex } from '@mui/system';
 import { useEffect, useState } from 'react';
 import { getAll } from '../models/ProductModel';
 import ProductItemSmall from './ProductItemSmall';
@@ -10,16 +12,14 @@ function ProductList({pathname}) {
   }, [pathname]);
 
   return (
-    <ul>
-      {products &&
-        products.map((product) => {
-          return (
-            <li key={`productId_${product.id}`}>
-              <ProductItemSmall product={product} />
-            </li>
-          );
-        })}
-    </ul>
+    <Grid container >
+        {products.map(product => (
+            <Grid item key={`productId_${product.id}`} xs={12} sm={12} md={3}>
+                <ProductItemSmall product={product} />
+            </Grid>
+        ))}
+    </Grid>
+
   );
 }
 
