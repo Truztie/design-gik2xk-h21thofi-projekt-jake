@@ -37,6 +37,10 @@ module.exports = (sequelize, DataTypes) => {
           len: [3, 100],
         },
       },
+      admin: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+      },
     },
     { underscored: true, onDelete: "CASCADE" }
   );
