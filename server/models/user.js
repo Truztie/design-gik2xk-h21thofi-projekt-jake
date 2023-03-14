@@ -1,3 +1,4 @@
+const { BOOLEAN } = require("sequelize");
 const sequelize = require("sequelize");
 
 module.exports = (sequelize, DataTypes) => {
@@ -38,7 +39,7 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
       admin: {
-        type: DataTypes.BOOLEAN,
+        type: BOOLEAN,
         defaultValue: false,
       },
     },
