@@ -5,6 +5,7 @@ import Navbar from "./components/Navbar";
 import { Routes, Route } from "react-router-dom";
 import ProductDetail from "./views/ProductDetail";
 import AdminView from "./views/AdminView";
+import ProductAdminDetail from "./views/ProductAdminDetail";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route exact path="/" element={<Welcome />}></Route>
         <Route exact path="/products" element={<Products />}></Route>
         <Route exact path="/products/:id" element={<ProductDetail />} />
+        <Route exact path="/products/:id/edit" element={<ProductAdminDetail />} />
         <Route exact path="/adminView" element={<AdminView />} />
       </Routes>
     </>
