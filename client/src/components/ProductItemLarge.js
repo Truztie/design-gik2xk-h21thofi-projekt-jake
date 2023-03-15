@@ -6,8 +6,12 @@ import {
   Typography,
   Button,
 } from "@mui/material";
+import { userContext } from "../App";
+import { useContext } from "react";
+import { addProductToCart } from "../models/CartModel";
 
 function ProductItemLarge({ product }) {
+  const { signedInUser } = useContext(userContext);
   return (
     <Card elevation={5} sx={{ mt: 10, marginX: "1rem" }}>
       <CardMedia
@@ -27,6 +31,17 @@ function ProductItemLarge({ product }) {
       </CardContent>
       <CardActions>
         <Button
+          onClick={() => {
+            if (signedInUser && signedInUser.cart) {
+              let cartId = signedInUser.cart.id;
+              let productId = product.id;
+              addProductToCart({ cartId, productId }).then(() => {
+                alert(`Product ${product.title} has been added to your cart`);
+              });
+            } else {
+              alert("U have to log in");
+            }
+          }}
           fullWidth
           variant="contained"
           size="small"

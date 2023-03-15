@@ -1,4 +1,6 @@
 import "./ProductItemSmall.css";
+import { userContext } from "../App";
+import { useContext } from "react";
 
 import {
   Card,
@@ -10,8 +12,11 @@ import {
   Rating,
 } from "@mui/material";
 import { Link } from "react-router-dom";
+import { addProductToCart } from "../models/CartModel";
+import ProductRating from "./ProductRating";
 
 function ProductItemSmall({ product }) {
+  const { signedInUser } = useContext(userContext);
   return (
     <Card elevation={10} sx={{ marginTop: "1rem", marginX: "1rem" }}>
       <Link to={`/products/${product.id}`}>
@@ -42,6 +47,17 @@ function ProductItemSmall({ product }) {
       </Link>
       <CardActions sx={{ display: "flex", justifyContent: "space-between" }}>
         <Button
+          onClick={() => {
+            if (signedInUser && signedInUser.cart) {
+              let cartId = signedInUser.cart.id;
+              let productId = product.id;
+              addProductToCart({ cartId, productId }).then(() => {
+                alert(`Product ${product.title} has been added to your cart`);
+              });
+            } else {
+              alert("U have to log in");
+            }
+          }}
           variant="contained"
           size="small"
           sx={{
@@ -55,7 +71,7 @@ function ProductItemSmall({ product }) {
         >
           Add to cart
         </Button>
-        <Rating name="read-only" value={5} readOnly />
+        <ProductRating rating={product.ratings}/>
         <Typography
           sx={{
             fontFamily: "Happy Monkey, cursive",
