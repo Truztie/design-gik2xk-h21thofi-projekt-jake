@@ -38,7 +38,7 @@ function CartView() {
                 fontSize: "3rem",
               }}
             >
-              {signedInUser.firstName}'s cart
+              {signedInUser ? `${signedInUser.firstName}'s cart` : "Cart"}
             </Typography>
           </Paper>
         </Grid>
@@ -142,7 +142,7 @@ function CartView() {
                 fontSize: "1.5rem",
               }}
             >
-              Total: {cart.total} SEK
+              {signedInUser ? `Total: ${cart.total} SEK` : "Total: 0 SEK"}
             </Typography>
             <Button
               variant="contained"

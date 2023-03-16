@@ -108,12 +108,5 @@ router.get("/:id", (req, res) => {
     });
 });
 
-router.post("/:id", (req, res) => {
-  const productId = req.params.id;
-  const rating = req.body
-  console.log(productId, rating);
-  
-});
-
 //detta exporteras till app.js
 module.exports = router;
