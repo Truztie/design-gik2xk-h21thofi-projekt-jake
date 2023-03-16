@@ -39,9 +39,9 @@ function ProductItemLarge({ product, clicked, setClicked }) {
 
   const { signedInUser } = useContext(userContext);
 
-  useEffect(() => {
+  useEffect(() =>{
     setValue(0);
-  }, [value]);
+  }, [value])
 
   return (
     <>
@@ -52,7 +52,7 @@ function ProductItemLarge({ product, clicked, setClicked }) {
             product.imageUrl ||
             `${process.env.PUBLIC_URL}/images/placeholder.png`
           }
-          title="green iguana"
+          title={product.title}
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
@@ -75,7 +75,6 @@ function ProductItemLarge({ product, clicked, setClicked }) {
                 alert("U have to log in");
               }
             }}
-            fullWidth
             variant="contained"
             size="small"
             sx={{
@@ -144,7 +143,10 @@ function ProductItemLarge({ product, clicked, setClicked }) {
               </Grid>
             ))
           ) : (
-            <Typography>No ratings</Typography>
+            <Typography sx={{fontFamily: "Happy Monkey, cursive",
+            fontWeight: "bold",
+            whiteSpace: "nowrap",
+            fontSize: "2rem"}}>No ratings</Typography>
           )}
         </Grid>
       </Paper>

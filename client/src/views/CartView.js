@@ -21,7 +21,7 @@ function CartView() {
       setCartProducts(null);
     }
     setClicked(false);
-  }, [signedInUser, clicked]);
+  }, [signedInUser, clicked, cartProducts]);
 
   return (
     <Grid container sx={{ mt: 10 }}>
