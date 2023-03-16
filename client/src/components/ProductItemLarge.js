@@ -5,14 +5,42 @@ import {
   CardMedia,
   Typography,
   Button,
+  Grid
 } from "@mui/material";
 import { userContext } from "../App";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { addProductToCart } from "../models/CartModel";
+import Rating from '@mui/material/Rating';
+import Box from '@mui/material/Box';
+import StarIcon from '@mui/icons-material/Star';
+import { addRatingToProduct } from "../models/RatingModel";
+
+const labels = {
+  0.5: 'Useless',
+  1: 'Useless+',
+  1.5: 'Poor',
+  2: 'Poor+',
+  2.5: 'Ok',
+  3: 'Ok+',
+  3.5: 'Good',
+  4: 'Good+',
+  4.5: 'Excellent',
+  5: 'Excellent+',
+};
+
+function getLabelText(value) {
+  return `${value} Star${value !== 1 ? 's' : ''}, ${labels[value]}`;
+}
+
 
 function ProductItemLarge({ product }) {
+  const [value, setValue] = useState(0);
+  const [hover, setHover] = useState(-1);
+
+
   const { signedInUser } = useContext(userContext);
   return (
+    <>
     <Card elevation={5} sx={{ mt: 10, marginX: "1rem" }}>
       <CardMedia
         sx={{ height: 300, width: "100%" }}
@@ -56,8 +84,48 @@ function ProductItemLarge({ product }) {
         >
           Add to cart
         </Button>
+        <Box
+      sx={{
+        width: 200,
+        display: 'flex',
+        alignItems: 'center',
+      }}
+    >
+      <Rating
+        name="hover-feedback"
+        value={value}
+        precision={0.5}
+        getLabelText={getLabelText}
+        onChange={(event, newValue) => {
+          setValue(newValue);
+          const productId = product.id;
+          const svar = addRatingToProduct({productId, newValue});
+          console.log(svar);
+        }}
+        onChangeActive={(event, newHover) => {
+          setHover(newHover);
+        }}
+        emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
+      />
+      {value !== null && (
+        <Box sx={{ ml: 2 }}>{labels[hover !== -1 ? hover : value]}</Box>
+      )}
+    </Box>
       </CardActions>
     </Card>
+    <Typography>Ratings</Typography>
+    <Grid container sx={{ mt: 10 }}>
+      {product.ratings && product.ratings.length > 0 ? (
+        product.ratings.map((rating) => (
+          <Grid item key={`ratingId_${rating.id}`} xs={12} sm={12} md={3}>
+            <Rating name="half-rating-read" precision={0.5} value={rating.rating} readOnly />
+          </Grid>
+        ))
+      ) : (
+        <Typography>No ratings</Typography>
+      )}
+    </Grid>
+    </>
   );
 }
 

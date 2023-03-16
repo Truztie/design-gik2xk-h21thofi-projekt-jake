@@ -1,6 +1,7 @@
 import "./ProductItemSmall.css";
 import { userContext } from "../App";
 import { useContext } from "react";
+import ProductRating from "./ProductRating";
 
 import {
   Card,
@@ -13,7 +14,6 @@ import {
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import { addProductToCart } from "../models/CartModel";
-import ProductRating from "./ProductRating";
 
 function ProductItemSmall({ product }) {
   const { signedInUser } = useContext(userContext);
@@ -71,7 +71,7 @@ function ProductItemSmall({ product }) {
         >
           Add to cart
         </Button>
-        <ProductRating rating={product.ratings}/>
+        <ProductRating rating={product.ratings} />
         <Typography
           sx={{
             fontFamily: "Happy Monkey, cursive",
